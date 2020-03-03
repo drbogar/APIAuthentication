@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "cross-env NODE_ENV=prod nodemon server/index.js",
-    "client-dev": "npm start --prefix client",
+    "client-dev": "cross-env BROWSER=none npm start --prefix client",
     "start-dev": "concurrently -n server,client \"npm run server-dev\" \"npm run client-dev\"",
     "test": "cross-env NODE_ENV=test mocha --exit --timeout 5000 __tests__/server/**/*.test.js",
     "report": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --exit --timeout 5000 __tests__/server/**/*.test.js",
@@ -15,9 +15,11 @@
   "author": "drbogar",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "cross-env": "^5.0.5",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",
