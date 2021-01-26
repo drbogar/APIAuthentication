@@ -5,6 +5,21 @@ import { AUTH_SIGN_UP, AUTH_ERROR } from './types';
     ActionCreators -> create/return Actions ({ }) -> dispatched -> middlewares -> reducers
 */
 
+export const oauthGoogle = data => {
+    return async dispatch => {
+        const res = await axios.post('http://localhost:5000/users/oauth/google', {
+            access_token: data
+        });
+        
+        dispatch({
+            type: AUTH_SIGN_UP,
+            payload: res.data.token
+        });
+
+        localStorage.setItem('JWT_TOKEN', res.data.token);
+    }
+}
+
 export const signUp = data => {
     /*
         Step 1) Use the data and to make HTTP request to our BE and send it along [X]
